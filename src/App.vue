@@ -14,14 +14,18 @@
         :before-close="handleLoginClose"
         style="overflow: hidden"
       >
-      <Forms  style="margin: auto"/>
+        <Forms />
       </el-dialog>
+
       <div class="router-view">
         <!-- <router-view></router-view> -->
-        <h1> {{ $route.path }} </h1>
+        <!-- <h1> {{ $route.path }} </h1> -->
         <Home v-if="$route.name == 'home'"/>
         <AllEvent v-if="$route.name == 'all-event'" />
         <LiveEvent v-if="$route.name == 'live-event'" />
+        <WhatDoWeDo v-if="$route.name == 'what-do-we-do'"/>
+		<Corporate1 v-if="$route.name == 'corporate-and-board-policies'"/>
+		<Corporate2 v-if="$route.name == 'marketing-committee'"/>
       </div>
     </div>
   </div>
@@ -33,6 +37,9 @@ import Home from "./components/Home.vue";
 import AllEvent from "./components/AllEvent.vue";
 import LiveEvent from "./components/LiveEvent.vue";
 import Forms from "./components/Forms.vue"
+import WhatDoWeDo from "./components/WhatDoWeDo.vue";
+import Corporate1 from "./components/Corporate1.vue";
+import Corporate2 from "./components/Corporate2.vue";
 
 export default {
   name: "App",
@@ -50,8 +57,15 @@ export default {
     }
   },
   components: {
-    Navbar, Home, AllEvent, LiveEvent, Forms
-  },
+    Navbar,
+    Home,
+    AllEvent,
+    LiveEvent,
+    Forms,
+    WhatDoWeDo,
+	Corporate1,
+	Corporate2,
+	},
 }
 </script>
 
@@ -68,24 +82,17 @@ body {
   /* 解决页面dialog出现时，页面padding增加，和页面滚动条消失造成的画面抖动 */
   padding-right: 0 !important;
   overflow-y: auto !important;
-  min-width: 1024px; 
+  min-width: 1080px; 
 }
 
 .app-body {
-  height: 100vh;
+  height: 300vh;
   font-family: "monterrat", sans-serif;
-  background-image: url('assets/background_galaxy.jpg');
+  background-image: url('../dist/img/background_galaxy.baab1ee4.jpg');
   background-size:cover;
   background-position-x: center;
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-}
-
-.router-view,
-.app-dialog {
-  position: absolute;
-  top: 50%;
-  left: 45%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .app-header {
@@ -97,6 +104,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.el-dialog__body {
+  position: fixed;
+  top: calc(50% - 230px);
+}
+
+.el-dialog__headerbtn .el-dialog__close{
+  font-size: 25px;
 }
 
 el-button:focus, 
